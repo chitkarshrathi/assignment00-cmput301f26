@@ -54,10 +54,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DecisionScreen() {
     var resultMessage by remember { mutableStateOf("") }
+    var clickCount by remember { mutableStateOf(0) }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Text(
-            text = "Student ID: 1761279\nCCID: chitkars\n\nClicks: ",
+            text = "Student ID: 1761279\nCCID: chitkars\n\nClicks: $clickCount ",
             fontSize = 16.sp,
             color = Color.Gray,
             modifier = Modifier
@@ -102,6 +103,7 @@ fun DecisionScreen() {
             ElevatedButton(
                 text = "YESH!",
                 onClick = {
+                    clickCount++
                     val roll = (1..100).random()
                     resultMessage = if (roll <= 50) {
                         "YESH!"
@@ -116,6 +118,7 @@ fun DecisionScreen() {
                 text = "Maybe-ish?",
                 onClick = {
                     val roll = (1..100).random()
+                    clickCount++
                     resultMessage = if (roll <= 25) {
                         "YESH!"
                     } else {
@@ -137,6 +140,7 @@ fun DecisionScreen() {
                 text = "No.. God, please No!",
                 onClick = {
                     val roll = (1..100).random()
+                    clickCount++
                     resultMessage = if (roll <= 10) {
                         "YESH!"
                     } else {
