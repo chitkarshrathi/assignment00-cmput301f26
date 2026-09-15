@@ -1,6 +1,5 @@
 package com.example.assignment0
 
-import android.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -35,6 +35,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
+import android.content.Context
+import android.graphics.ImageDecoder
+import android.graphics.drawable.AnimatedImageDrawable
+import android.net.Uri
+import android.os.Build
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
+import androidx.compose.ui.platform.LocalContext
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,6 +137,7 @@ fun DecisionScreen() {
                 modifier = Modifier.weight(1f).padding(horizontal = 1.dp)
             )
         }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -155,8 +165,36 @@ fun DecisionScreen() {
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White,
-            modifier = Modifier.padding(top = 24.dp)
+            modifier = Modifier.padding(top = 24.dp, bottom = 24.dp)
         )
+
+        val context = LocalContext.current
+
+        if (resultMessage.isNotEmpty()) {
+            val gifResource = if (resultMessage.contains("YESH!")) {
+                R.drawable.yes
+            } else {
+                R.drawable.no
+            }
+
+            val drawable = remember(gifResource) {
+                context.getDrawable(gifResource)?.apply {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        if (this is AnimatedImageDrawable) {
+                            start()
+                        }
+                    }
+                }
+            }
+
+            if (drawable != null) {
+                Image(
+                    painter = rememberDrawablePainter(drawable = drawable),
+                    contentDescription = "Michael Scott GIF",
+                    modifier = Modifier.size(200.dp)
+                )
+            }
+        }
     }
 }
 
