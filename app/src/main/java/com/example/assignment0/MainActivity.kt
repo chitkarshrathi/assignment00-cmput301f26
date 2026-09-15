@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,6 +20,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.ui.text.font.FontWeight
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
+                color = Color.Black
             ) {
                 DecisionScreen()
             }
@@ -49,33 +50,43 @@ fun DecisionScreen() {
     ) {
         ElevatedButton(
             onClick = { },
+            colors = ButtonDefaults.elevatedButtonColors(
+                contentColor = Color.Black
+            ),
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
         ) {
-            Text("Yes")
+            Text(
+                text = "Yesh!",
+                fontWeight = FontWeight.Bold
+            )
         }
 
         ElevatedButton(
             onClick = { },
+            colors = ButtonDefaults.elevatedButtonColors(
+                contentColor = Color.Black
+            ),
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
         ) {
-            Text("Maybe")
+            Text(
+                text = "Maybe-ish?",
+                fontWeight = FontWeight.Bold
+            )
         }
 
         ElevatedButton(
             onClick = { },
+            colors = ButtonDefaults.elevatedButtonColors(
+                contentColor = Color.Black
+            ),
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
         ) {
-            Text("No")
+            Text(
+                text = "No... God, No!",
+                fontWeight = FontWeight.Bold
+            )
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello my name is $name!",
-        modifier = modifier
-    )
 }
 
 
@@ -83,13 +94,5 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun ElevatedButtonExample(onClick: () -> Unit) {
     ElevatedButton(onClick = { onClick()}) {
         Text("Elevated")
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Assignment0Theme {
-        Greeting("Chitkarsh")
     }
 }
