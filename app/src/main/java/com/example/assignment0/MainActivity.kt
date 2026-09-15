@@ -6,9 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,42 +52,35 @@ fun DecisionScreen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ElevatedButton(
-            onClick = { },
-            colors = ButtonDefaults.elevatedButtonColors(
-                contentColor = Color.Black
-            ),
-            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = "Yesh!",
-                fontWeight = FontWeight.Bold
+            ElevatedButton(
+                text = "YESH!",
+                onClick = { },
+                modifier = Modifier.weight(1f).padding(horizontal = 1.dp)
             )
-        }
 
-        ElevatedButton(
-            onClick = { },
-            colors = ButtonDefaults.elevatedButtonColors(
-                contentColor = Color.Black
-            ),
-            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
-        ) {
-            Text(
+            ElevatedButton(
                 text = "Maybe-ish?",
-                fontWeight = FontWeight.Bold
+                onClick = { },
+                modifier = Modifier.weight(1f).padding(horizontal = 1.dp)
             )
         }
-
-        ElevatedButton(
-            onClick = { },
-            colors = ButtonDefaults.elevatedButtonColors(
-                contentColor = Color.Black
-            ),
-            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = "No... God, No!",
-                fontWeight = FontWeight.Bold
+
+            ElevatedButton(
+                text = "No.. God, please No!",
+                onClick = { },
+                modifier = Modifier.weight(1f).padding(horizontal = 80.dp)
             )
         }
     }
@@ -91,8 +88,24 @@ fun DecisionScreen() {
 
 
 @Composable
-fun ElevatedButtonExample(onClick: () -> Unit) {
-    ElevatedButton(onClick = { onClick()}) {
-        Text("Elevated")
+fun ElevatedButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    ElevatedButton(
+        onClick = onClick,
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(8.dp),
+        colors = ButtonDefaults.elevatedButtonColors(
+            contentColor = Color.Black
+        )
+    ) {
+        Text(
+            text = text,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1
+        )
     }
 }
