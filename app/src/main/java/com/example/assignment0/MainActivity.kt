@@ -27,6 +27,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +51,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DecisionScreen() {
+    var resultMessage by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -52,6 +60,26 @@ fun DecisionScreen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Text(
+            text = "\"You miss 100% of the shots you don't take. - Wayne Gretzky\"\n- Michael Scott",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            color = Color.White,
+            modifier = Modifier.padding(bottom = 24.dp),
+            fontStyle = FontStyle.Italic,
+
+        )
+
+        Text(
+            text = "Press a button to see if Michael summons you to this restaurant...",
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Medium,
+            color = Color.LightGray,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -59,13 +87,27 @@ fun DecisionScreen() {
         ) {
             ElevatedButton(
                 text = "YESH!",
-                onClick = { },
+                onClick = {
+                    val roll = (1..100).random()
+                    resultMessage = if (roll <= 50) {
+                        "YESH!"
+                    } else {
+                        "NOH"
+                    }
+                },
                 modifier = Modifier.weight(1f).padding(horizontal = 1.dp)
             )
 
             ElevatedButton(
                 text = "Maybe-ish?",
-                onClick = { },
+                onClick = {
+                    val roll = (1..100).random()
+                    resultMessage = if (roll <= 25) {
+                        "YESH!"
+                    } else {
+                        "NOH"
+                    }
+                },
                 modifier = Modifier.weight(1f).padding(horizontal = 1.dp)
             )
         }
@@ -79,10 +121,24 @@ fun DecisionScreen() {
 
             ElevatedButton(
                 text = "No.. God, please No!",
-                onClick = { },
+                onClick = {
+                    val roll = (1..100).random()
+                    resultMessage = if (roll <= 10) {
+                        "YESH!"
+                    } else {
+                        "NOH"
+                    }
+                },
                 modifier = Modifier.weight(1f).padding(horizontal = 80.dp)
             )
         }
+        Text(
+            text = resultMessage,
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier.padding(top = 24.dp)
+        )
     }
 }
 
