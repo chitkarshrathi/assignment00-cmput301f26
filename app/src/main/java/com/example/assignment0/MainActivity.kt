@@ -1,10 +1,12 @@
 package com.example.assignment0
 
+import android.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -52,6 +54,18 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DecisionScreen() {
     var resultMessage by remember { mutableStateOf("") }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Text(
+            text = "Student ID: 1761279\nCCID: chitkars\n\nClicks: ",
+            fontSize = 16.sp,
+            color = Color.Gray,
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(24.dp)
+        )
+
+    }
 
     Column(
         modifier = Modifier
